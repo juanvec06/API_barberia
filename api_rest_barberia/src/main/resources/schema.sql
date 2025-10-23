@@ -13,11 +13,13 @@ CREATE TABLE clientes (
     FOREIGN KEY (idCategoria) REFERENCES categorias(id)
 );
 
-
-
-
-
-
-
-
-
+CREATE TABLE servicios (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(255),
+    descripcion VARCHAR(255),
+    precio INT,
+    imagen BLOB,
+    duracionMinu INT NOT NULL,
+    idCategoria INT,
+    FOREIGN KEY (idCategoria) REFERENCES categorias(id)
+);
