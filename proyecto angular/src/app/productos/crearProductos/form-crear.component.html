@@ -1,0 +1,98 @@
+<!-- Ruta: src/app/productos/crearProductos/form-crear.component.html -->
+<div class="form-container mx-auto">
+  <h1 class="form-title text-center mb-4">Registrar Nuevo Servicio</h1>
+
+  <!-- 
+    - [formGroup]="productForm" enlaza este form con  FormGroup en el .ts.
+    - (ngSubmit) sigue llamando a la misma función.
+  -->
+  <form [formGroup]="productForm" (ngSubmit)="registrarProducto()">
+    
+    <!-- Campo Nombre -->
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <!-- 
+        - formControlName="nombre" lo enlaza al control 'nombre'.
+        - [ngClass] añade la clase 'is-invalid' de Bootstrap si el campo no es válido y ha sido tocado.
+      -->
+      <input type="text" class="form-control" id="nombre" formControlName="nombre" 
+             [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }">
+      
+      <!-- Contenedor para los mensajes de error -->
+      <div *ngIf="f['nombre'].invalid && f['nombre'].touched" class="invalid-feedback">
+        <div *ngIf="f['nombre'].errors?.['required']">El nombre es obligatorio.</div>
+        <div *ngIf="f['nombre'].errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
+      </div>
+    </div>
+
+    <!-- Campo Descripción -->
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción:</label>
+      <textarea class="form-control" id="descripcion" formControlName="descripcion" rows="3"
+                [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"></textarea>
+      
+      <div *ngIf="f['descripcion'].invalid && f['descripcion'].touched" class="invalid-feedback">
+        <div *ngIf="f['descripcion'].errors?.['required']">La descripción es obligatoria.</div>
+      </div>
+    </div>
+
+    <!-- Campo Categoría -->
+    <div class="mb-3">
+      <label for="categoria" class="form-label">Categoría:</label>
+      <select class="form-select" id="categoria" formControlName="objCategoria"
+              [ngClass]="{ 'is-invalid': f['objCategoria'].invalid && f['objCategoria'].touched }">
+        <option [ngValue]="null" disabled>Seleccione una categoría</option>
+        <option *ngFor="let cat of categorias" [ngValue]="cat">{{ cat.nombre }}</option>
+      </select>
+
+      <div *ngIf="f['objCategoria'].invalid && f['objCategoria'].touched" class="invalid-feedback">
+        Debe seleccionar una categoría.
+      </div>
+    </div>
+
+    <!-- Campo Estado -->
+    <div class="mb-3">
+      <label class="form-label d-block">Estado:</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="disponible" value="Disponible" formControlName="estado">
+        <label class="form-check-label" for="disponible">Disponible</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="noDisponible" value="No Disponible" formControlName="estado">
+        <label class="form-check-label" for="noDisponible">No Disponible</label>
+      </div>
+    </div>
+
+    <!-- Fila para Duración y Precio -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="duracion" class="form-label">Duración (ej: 45 min):</label>
+        <input type="text" class="form-control" id="duracion" formControlName="duracion">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="precio" class="form-label">Precio:</label>
+        <input type="number" class="form-control" id="precio" formControlName="precio"
+               [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }">
+        
+        <div *ngIf="f['precio'].invalid && f['precio'].touched" class="invalid-feedback">
+          <div *ngIf="f['precio'].errors?.['required']">El precio es obligatorio.</div>
+          <div *ngIf="f['precio'].errors?.['pattern']">El precio solo debe contener números.</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Campo Imagen (simulado) -->
+    <div class="mb-4">
+      <label for="imagen" class="form-label">Imagen:</label>
+      <input type="file" class="form-control" id="imagen">
+    </div>
+
+    <!-- Botón de Envío -->
+    <div class="d-grid">
+      <!-- 
+        - [disabled] deshabilita el botón si el formulario completo no es válido.
+      -->
+      <button type="submit" class="btn btn-submit" [disabled]="productForm.invalid">Registrar</button>
+    </div>
+  </form>
+</div>

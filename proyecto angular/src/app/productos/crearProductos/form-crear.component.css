@@ -1,0 +1,56 @@
+/* Ruta: src/app/productos/crearProductos/form-crear.component.css */
+.form-container {
+  max-width: 700px;
+}
+
+.form-title {
+  font-family: var(--fuente-titulos);
+  color: var(--color-acento);
+}
+
+.form-label {
+  color: var(--color-texto);
+  opacity: 0.9;
+  font-weight: bold;
+}
+
+/* Estilos para que los inputs y selects tengan un look dark mode */
+.form-control, .form-select {
+  background-color: #343a40; /* Un gris oscuro, similar al de la tabla */
+  color: var(--color-texto);
+  border: 1px solid #555;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #343a40;
+  color: var(--color-texto);
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 0.25rem rgba(212, 133, 93, 0.25); /* Sombra de foco con nuestro color de acento */
+}
+
+/* Estilo para el texto de los 'option' en el dropdown */
+option {
+  background-color: #343a40;
+}
+
+/* Estilo para los radio buttons */
+.form-check-input:checked {
+  background-color: var(--color-acento);
+  border-color: var(--color-acento);
+}
+
+/* Estilo para el botón de registro */
+.btn-submit {
+  background-color: var(--color-acento);
+  color: var(--color-fondo);
+  border: 1px solid var(--color-acento);
+  font-weight: bold;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: var(--color-fondo);
+  color: var(--color-acento);
+}

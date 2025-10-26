@@ -1,5 +1,48 @@
+/* Ruta: src/app/footer/footer.component.css */
 
+/*
+ :host es un selector especial en Angular que se refiere al componente mismo.
+ En este caso, nos aseguramos de que los estilos se apliquen al <app-footer>.
+*/
+:host {
+  width: 100%;
+}
 
-footer{
-    background-color: #2211a5d7
+/* Estilo principal del contenedor del footer */
+footer {
+  background-color: var(--color-cuerpo); /* Nuestro fondo carbón oscuro */
+  color: var(--color-texto);           /* Nuestro texto blanco hueso */
+  border-top: 2px solid var(--color-acento); /* Un borde superior para separar del contenido */
+}
+
+/* Estilo para los títulos (H5) del footer */
+h5 {
+  font-family: var(--fuente-titulos); /* La fuente especial para títulos */
+  color: var(--color-acento);         /* El color de acento terracota */
+  letter-spacing: 1px;                /* Un poco de espacio entre letras para un look más refinado */
+}
+
+/* Estilo para los párrafos dentro del footer */
+p {
+  color: var(--color-texto);
+  opacity: 0.8; /* Hacemos el texto un poco más sutil que los títulos */
+}
+
+/* Estilo para los enlaces (<a>) dentro de los párrafos */
+p a {
+  color: var(--color-texto);
+  text-decoration: none;      /* Quitamos el subrayado por defecto */
+  transition: color 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+/* Efecto hover para los enlaces: cambian al color de acento */
+p a:hover {
+  color: var(--color-acento);
+}
+
+/* Estilo para los íconos de Bootstrap (bi) */
+i {
+  color: var(--color-acento); /* Los íconos también llevarán el color de acento */
+  margin-right: 10px;         /* Un pequeño margen para separarlos del texto */
+  font-size: 1.2rem;          /* Hacemos los íconos un poco más grandes */
 }

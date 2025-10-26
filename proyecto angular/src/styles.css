@@ -1,13 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat:wght@400;700&display=swap');
+
+/* Definición de la Paleta de Colores y Fuentes */
+:root {
+  /* Colores */
+  --color-fondo: #44261a;
+  --color-acento: #D4855D;
+  --color-texto: #F5F5DC;
+  --color-cuerpo: #000000;
+
+  --fuente-titulos: 'Alfa Slab One', serif;
+  --fuente-cuerpo: 'Montserrat', sans-serif;
+}
+
 body {
-    overflow-x: hidden; /* Evita el desbordamiento horizontal */
-  }
+  overflow-x: hidden;
+  font-family: var(--fuente-cuerpo);
+  background: linear-gradient( var(--color-fondo) 20%, #1A1716 40%, var(--color-cuerpo) 70%);
+  color: var(--color-texto);
+}
+
+
+
+
 
 .contenedor {
-    min-height:50vh;
-    position:relative;  
-   }   
-footer{    
-    padding:15px;
+  min-height: 50vh;
+  position: relative;
 }
-  
 
+footer {
+  padding: 15px;
+}

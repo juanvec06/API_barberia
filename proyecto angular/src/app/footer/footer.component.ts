@@ -8,8 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-  public proyecto: any = {anio: '2024', nombreProyecto: 'Proyecto de Clase'};
-  public tecnologia: any = {leyenda: 'WebApp desarrollada con ', tec1: 'Angular ', tec2: 'Spring-Spring Boot'};
-  public autor: string = 'Desarrollado por ...';
 }
 

@@ -1,26 +1,64 @@
-header {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color: #6da1d9; 
-    color: white;
-  }
-  .profile-info {
-    text-align: center;
-  }
+/* Ruta: src/app/header/header.component.css */
 
-  .profile-info h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
+/* Estilo para el contenedor del componente */
+:host {
+  width: 100%;
+}
 
-  .social-icons a {
-    color: white;
-    margin: 0 10px;
-    font-size: 1.5rem;
-    transition: color 0.3s;
-  }
+/* Estilo principal de la barra de navegación */
+.navbar {
+  background-color: var(--color-fondo);
+  border-bottom: 2px solid var(--color-acento);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 
-  .social-icons a:hover {
-    color: #dcdcdc; 
-  }
+/* Estilo para el logo/nombre de la barbería */
+.navbar-brand {
+  font-family: var(--fuente-titulos);
+  font-size: 1.8rem;
+  color: var(--color-texto) !important; /*  !important para sobreescribir Bootstrap */
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--color-acento) !important;
+}
+
+/* Estilo para los enlaces de navegación */
+.nav-link {
+  color: var(--color-texto) !important;
+  font-family: var(--fuente-cuerpo);
+  font-weight: 700; /* Letra un poco más gruesa */
+  text-transform: uppercase; /* Mayúsculas para un estilo más formal */
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-acento) !important;
+}
+
+/* Estilo para el icono de "Iniciar Sesión" */
+.nav-link i {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+/* --- Estilos para el botón hamburguesa (Toggler) --- */
+
+/* Cambia el color del borde del botón */
+.navbar-toggler {
+  border-color: var(--color-acento);
+}
+
+/*
+  Personalizamos el icono de hamburguesa.
+  Bootstrap usa un SVG como background-image. Lo reemplazamos con uno
+  que utiliza nuestro color de texto (--color-texto) para que sea visible
+  sobre nuestro fondo oscuro.
+*/
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23F5F5DC' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}

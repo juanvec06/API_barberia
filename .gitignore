@@ -4,8 +4,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+#Angular
+proyecto angular/.angular/
 
-### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -37,7 +38,7 @@ build/
 /bazel-out
 
 # Node
-/node_modules
+/proyecto angular/node_modules
 npm-debug.log
 yarn-error.log
 

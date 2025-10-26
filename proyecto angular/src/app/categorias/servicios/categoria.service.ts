@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class categoriaService {
+export class CategoriaService {
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   private urlEndPoint: string = 'http://localhost:5000/api/categorias';
