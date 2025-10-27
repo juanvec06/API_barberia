@@ -5,7 +5,6 @@
   justify-content: center;
   text-align: center;
   padding: 5rem 1rem;
-  border: 2px dashed var(--color-acento);
   border-radius: 10px;
   min-height: 50vh;
 }

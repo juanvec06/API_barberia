@@ -41,8 +41,9 @@ export class FormActualizarComponent implements OnInit {
       descripcion: ['', Validators.required],
       objCategoria: [null, Validators.required],
       estado: ['Disponible', Validators.required],
-      duracion: [''],
-      precio: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]]
+      duracion: ['', Validators.required],
+      precio: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      imagen: [null, Validators.required]
     });
 
     // 2. Obtenemos el ID de la URL una sola vez.
@@ -75,6 +76,24 @@ export class FormActualizarComponent implements OnInit {
 
   // Getter para un acceso más fácil a los controles en el HTML (sin cambios).
   get f() { return this.productForm.controls; }
+
+  /**
+ * Se ejecuta cuando el usuario selecciona un archivo en el input de imagen.
+ * @param event El evento del input de archivo.
+ */
+  public onFileSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.productForm.patchValue({
+          imagen: reader.result as string
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   // El método para actualizar ya usaba la fachada, así que no necesita cambios.
   public actualizarProducto(): void {

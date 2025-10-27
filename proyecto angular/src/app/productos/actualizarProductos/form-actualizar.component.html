@@ -1,15 +1,15 @@
 <!-- Ruta: src/app/productos/actualizarProductos/form-actualizar.component.html -->
-<div class="form-container mx-auto">
+<div class="form-container mx-auto py-5">
   <h1 class="form-title text-center mb-4">Actualizar Servicio</h1>
 
   <form [formGroup]="productForm" (ngSubmit)="actualizarProducto()">
-    
+
     <!-- Campo Nombre -->
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" formControlName="nombre" 
-             [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }">
-      
+      <input type="text" class="form-control" id="nombre" formControlName="nombre"
+        [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }">
+
       <div *ngIf="f['nombre'].invalid && f['nombre'].touched" class="invalid-feedback">
         <div *ngIf="f['nombre'].errors?.['required']">El nombre es obligatorio.</div>
         <div *ngIf="f['nombre'].errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
@@ -20,8 +20,8 @@
     <div class="mb-3">
       <label for="descripcion" class="form-label">Descripción:</label>
       <textarea class="form-control" id="descripcion" formControlName="descripcion" rows="3"
-                [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"></textarea>
-      
+        [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"></textarea>
+
       <div *ngIf="f['descripcion'].invalid && f['descripcion'].touched" class="invalid-feedback">
         <div *ngIf="f['descripcion'].errors?.['required']">La descripción es obligatoria.</div>
       </div>
@@ -31,7 +31,7 @@
     <div class="mb-3">
       <label for="categoria" class="form-label">Categoría:</label>
       <select class="form-select" id="categoria" formControlName="objCategoria"
-              [ngClass]="{ 'is-invalid': f['objCategoria'].invalid && f['objCategoria'].touched }">
+        [ngClass]="{ 'is-invalid': f['objCategoria'].invalid && f['objCategoria'].touched }">
         <option [ngValue]="null" disabled>Seleccione una categoría</option>
         <option *ngFor="let cat of categorias" [ngValue]="cat">{{ cat.nombre }}</option>
       </select>
@@ -63,19 +63,26 @@
       <div class="col-md-6 mb-3">
         <label for="precio" class="form-label">Precio:</label>
         <input type="number" class="form-control" id="precio" formControlName="precio"
-               [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }">
-        
+          [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }">
+
         <div *ngIf="f['precio'].invalid && f['precio'].touched" class="invalid-feedback">
           <div *ngIf="f['precio'].errors?.['required']">El precio es obligatorio.</div>
           <div *ngIf="f['precio'].errors?.['pattern']">El precio solo debe contener números.</div>
         </div>
       </div>
     </div>
-    
-    <!-- Campo Imagen (simulado) -->
+
+    <!-- Campo Imagen -->
     <div class="mb-4">
-      <label for="imagen" class="form-label">Imagen:</label>
-      <input type="file" class="form-control" id="imagen">
+      <label for="imagen" class="form-label">Cambiar Imagen (opcional):</label>
+      <input type="file" class="form-control" id="imagen" accept="image/*" (change)="onFileSelect($event)">
+    </div>
+
+    <!-- Vista previa de la imagen actual (o la nueva que se seleccione) -->
+    <div *ngIf="f['imagen'].value" class="mb-4 text-center">
+      <label class="form-label d-block">Vista Previa:</label>
+      <img [src]="f['imagen'].value" alt="Vista previa de la imagen" class="img-fluid rounded"
+        style="max-height: 200px;">
     </div>
 
     <!-- Botón de Envío -->

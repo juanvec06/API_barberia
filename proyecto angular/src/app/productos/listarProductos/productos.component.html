@@ -1,15 +1,18 @@
-<!-- Ruta: src/app/productos/listarProductos/productos.component.html -->
+<!-- Ruta: src/app/productos/listarProductos/productos.component.html  -->
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="main-title">Gestión de Servicios</h1>
-    <!-- Botón para navegar a la página de registro de un nuevo producto -->
     <a routerLink="/registrarProducto" class="btn btn-accent">
       <i class="bi bi-plus-circle-fill me-2"></i>Registrar Nuevo Servicio
     </a>
   </div>
 
-  <div class="table-responsive">
-    <!-- Usamos clases de Bootstrap para una tabla con tema oscuro y bordes -->
+  <!-- 
+    - Si la lista de productos existe y su longitud es mayor que 0, se muestra el div de la tabla.
+    - Si no, se muestra el bloque de plantilla (<ng-template>) llamado 'noProductsBlock'.
+  -->
+  <div *ngIf="listaProductos && listaProductos.length > 0; else noProductsBlock" class="table-responsive">
+    
     <table class="table table-dark table-striped table-bordered align-middle">
       <thead>
         <tr class="text-center">
@@ -20,22 +23,17 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Usamos *ngFor para recorrer la lista de productos y crear una fila para cada uno -->
         <tr *ngFor="let producto of listaProductos" class="text-center">
           <td>{{ producto.nombre }}</td>
           <td>
-            <!-- Usamos *ngIf para mostrar un badge diferente según el estado -->
             <span *ngIf="producto.estado === 'Disponible'" class="badge bg-success">Disponible</span>
             <span *ngIf="producto.estado === 'No Disponible'" class="badge bg-danger">No Disponible</span>
           </td>
-          <!-- Usamos el 'optional chaining' (?) por si objCategoria fuera nulo -->
           <td>{{ producto.objCategoria?.nombre }}</td>
           <td>
-            <!-- Botón para editar: Navega a la ruta de actualizar, pasando el ID del producto -->
             <a [routerLink]="['/actualizarProducto', producto.id]" class="btn btn-outline-warning btn-sm me-2">
               <i class="bi bi-pencil-fill"></i>
             </a>
-            <!-- Botón para eliminar: Llama a la función eliminarProducto() del componente -->
             <button (click)="eliminarProducto(producto)" class="btn btn-outline-danger btn-sm">
               <i class="bi bi-trash-fill"></i>
             </button>
@@ -43,5 +41,21 @@
         </tr>
       </tbody>
     </table>
+
   </div>
+
+  <!-- 
+    BLOQUE 'ELSE': <ng-template> con la variable #noProductsBlock
+    Este bloque solo se renderiza en el DOM cuando la condición del *ngIf es falsa.
+  -->
+  <ng-template #noProductsBlock>
+    <div class="empty-state-container">
+      <h2 class="empty-state-title">No hay servicios registrados</h2>
+      <p class="empty-state-message">¡Comienza agregando el primer servicio a tu barbería!</p>
+      <a routerLink="/registrarProducto" class="btn btn-accent mt-3">
+        <i class="bi bi-plus-circle-fill me-2"></i>Registrar Servicio
+      </a>
+    </div>
+  </ng-template>
+
 </div>

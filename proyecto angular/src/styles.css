@@ -17,6 +17,7 @@ body {
   font-family: var(--fuente-cuerpo);
   background: linear-gradient( var(--color-fondo) 20%, #1A1716 40%, var(--color-cuerpo) 70%);
   color: var(--color-texto);
+  margin: 15px;
 }
 
 
