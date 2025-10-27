@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ClienteDTOPeticion;
+import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ServicioDTOPeticion;
 import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ClienteDTORespuesta;
 import co.edu.unicauca.distribuidos.core.fachadaServices.services.IClienteService;
 
@@ -40,14 +40,14 @@ public class ClienteRestController {
 	}
 	
 	@PostMapping("/clientes")
-	public ClienteDTORespuesta crearCliente(@RequestBody ClienteDTOPeticion cliente) {
+	public ClienteDTORespuesta crearCliente(@RequestBody ServicioDTOPeticion cliente) {
 		ClienteDTORespuesta objCliente = null;
 		objCliente = clienteService.save(cliente);
 		return objCliente;
 	}
 
 	@PutMapping("/clientes/{id}")
-	public ClienteDTORespuesta actualizarCliente(@RequestBody ClienteDTOPeticion cliente, @PathVariable Integer id) {
+	public ClienteDTORespuesta actualizarCliente(@RequestBody ServicioDTOPeticion cliente, @PathVariable Integer id) {
 		ClienteDTORespuesta objCliente = null;
 		ClienteDTORespuesta clienteActual = clienteService.findById(id);
 		if (clienteActual != null) {

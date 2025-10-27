@@ -14,12 +14,13 @@ CREATE TABLE clientes (
 );
 
 CREATE TABLE servicios (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255),
     descripcion VARCHAR(255),
+    estado BOOLEAN,
     precio INT,
-    imagen BLOB,
-    duracionMinu INT NOT NULL,
+    imagen VARCHAR(500),
+    duracionMin INT NOT NULL,
     idCategoria INT,
     FOREIGN KEY (idCategoria) REFERENCES categorias(id)
 );

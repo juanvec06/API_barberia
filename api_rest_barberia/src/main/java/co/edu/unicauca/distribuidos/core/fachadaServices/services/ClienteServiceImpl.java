@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.distribuidos.core.capaAccesoADatos.models.ClienteEntity;
 import co.edu.unicauca.distribuidos.core.capaAccesoADatos.repositories.UsuarioRepositoryBaseDatos;
-import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ClienteDTOPeticion;
+import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ServicioDTOPeticion;
 import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ClienteDTORespuesta;
 
 @Service//El objeto creado se almacena en el contenedor de Spring
@@ -64,35 +64,37 @@ public class ClienteServiceImpl implements IClienteService {
 	}
 
 	@Override
-	public ClienteDTORespuesta save(ClienteDTOPeticion cliente) {
-		ClienteEntity clienteEntity = this.modelMapper.map(cliente, ClienteEntity.class);
-		clienteEntity.setEstado(true);
-		clienteEntity.setCreateAt(new Date());
-		ClienteEntity objCLienteEntity = this.servicioAccesoBaseDatos.save(clienteEntity);
-		System.out.println(objCLienteEntity);
-		ClienteDTORespuesta clienteDTO = this.modelMapper.map(objCLienteEntity, ClienteDTORespuesta.class);
-		return clienteDTO;
+	public ClienteDTORespuesta save(ServicioDTOPeticion cliente) {
+//		ClienteEntity clienteEntity = this.modelMapper.map(cliente, ClienteEntity.class);
+//		clienteEntity.setEstado(true);
+//		clienteEntity.setCreateAt(new Date());
+//		ClienteEntity objCLienteEntity = this.servicioAccesoBaseDatos.save(clienteEntity);
+//		System.out.println(objCLienteEntity);
+//		ClienteDTORespuesta clienteDTO = this.modelMapper.map(objCLienteEntity, ClienteDTORespuesta.class);
+//		return clienteDTO;
+		return null;
 	}
 
 	@Override
-	public ClienteDTORespuesta update(Integer id, ClienteDTOPeticion cliente) {
-		ClienteEntity clienteActualizado=null;
-		Optional<ClienteEntity> clienteEntityOp = this.servicioAccesoBaseDatos.findById(id);
-
-		if(clienteEntityOp.isPresent())
-		{
-			ClienteEntity objCLienteDatosNuevos=clienteEntityOp.get();
-			objCLienteDatosNuevos.setNombre(cliente.getNombre());
-			objCLienteDatosNuevos.setApellido(cliente.getApellido());
-			objCLienteDatosNuevos.setEmail(cliente.getEmail());
-			objCLienteDatosNuevos.getObjCategoria().setId(cliente.getObjCategoria().getId());
-			objCLienteDatosNuevos.getObjCategoria().setNombre("");
-
-			Optional<ClienteEntity> optionalCliente = this.servicioAccesoBaseDatos.update(id, objCLienteDatosNuevos);
-			clienteActualizado=optionalCliente.get(); 
-		}
-
-		return this.modelMapper.map(clienteActualizado, ClienteDTORespuesta.class);
+	public ClienteDTORespuesta update(Integer id, ServicioDTOPeticion cliente) {
+//		ClienteEntity clienteActualizado=null;
+//		Optional<ClienteEntity> clienteEntityOp = this.servicioAccesoBaseDatos.findById(id);
+//
+//		if(clienteEntityOp.isPresent())
+//		{
+//			ClienteEntity objCLienteDatosNuevos=clienteEntityOp.get();
+//			objCLienteDatosNuevos.setNombre(cliente.getNombre());
+//			objCLienteDatosNuevos.setApellido(cliente.getApellido());
+//			objCLienteDatosNuevos.setEmail(cliente.getEmail());
+//			objCLienteDatosNuevos.getObjCategoria().setId(cliente.getObjCategoria().getId());
+//			objCLienteDatosNuevos.getObjCategoria().setNombre("");
+//
+//			Optional<ClienteEntity> optionalCliente = this.servicioAccesoBaseDatos.update(id, objCLienteDatosNuevos);
+//			clienteActualizado=optionalCliente.get();
+//		}
+//
+//		return this.modelMapper.map(clienteActualizado, ClienteDTORespuesta.class);
+		return null;
 	}
 
 	@Override
