@@ -6,7 +6,6 @@ import co.edu.unicauca.distribuidos.core.fachadaServices.services.IServicioServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.util.List;
 
 @RestController
@@ -35,5 +34,20 @@ public class ServicioRestController {
         return servicioRespuesta;
     }
 
+    @DeleteMapping("/servicios/{id}")
+    public Boolean eliminarServicio(@PathVariable Integer id) {
+        Boolean bandera = false;
+        ServicioDTORespuesta clienteActual = servicioService.findById(id);
+        if (clienteActual != null) {
+            bandera = servicioService.delete(id);
+        }
+        return bandera;
+    }
 
+    @PutMapping("/servicios/{id}")
+    public ServicioDTORespuesta actualizarServicio(@PathVariable Integer id, @RequestBody ServicioDTOPeticion servicioPeluqueria) {
+        ServicioDTORespuesta servicioRespuesta = new ServicioDTORespuesta();
+        servicioRespuesta = servicioService.update(id, servicioPeluqueria);
+        return servicioRespuesta;
+    }
 }

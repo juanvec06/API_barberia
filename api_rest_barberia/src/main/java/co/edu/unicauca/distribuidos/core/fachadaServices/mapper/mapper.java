@@ -1,6 +1,7 @@
 package co.edu.unicauca.distribuidos.core.fachadaServices.mapper;
 
 import co.edu.unicauca.distribuidos.core.capaAccesoADatos.models.ServicioEntity;
+import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ServicioDTOPeticion;
 import co.edu.unicauca.distribuidos.core.fachadaServices.DTO.ServicioDTORespuesta;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -27,11 +28,11 @@ public class mapper {
         // Convertidor de byte[] a string
         ByteArrayToStringConverter byteArrayToStringConverter = new ByteArrayToStringConverter();
 
-        TypeMap<ServicioDTORespuesta, ServicioEntity> responseToEntityMap =
-                modelMapper.createTypeMap(ServicioDTORespuesta.class, ServicioEntity.class);
+        TypeMap<ServicioDTOPeticion, ServicioEntity> responseToEntityMap =
+                modelMapper.createTypeMap(ServicioDTOPeticion.class, ServicioEntity.class);
 
         responseToEntityMap.addMappings(mapper ->
-                mapper.using(byteArrayToStringConverter).map(ServicioDTORespuesta::getImagen, ServicioEntity::setImagen)
+                mapper.using(byteArrayToStringConverter).map(ServicioDTOPeticion::getImagen, ServicioEntity::setImagen)
         );
         return modelMapper;//El objeto retornado se almacena en el contenedor de Spring
     }

@@ -12,6 +12,7 @@ public class ServicioDTOPeticion {
 	private Integer precio;
 	private byte[] imagen;
 	private Integer duracionMin;
+	private Boolean estado;
 
 	private CategoriaDTOPeticion objCategoria;
 
