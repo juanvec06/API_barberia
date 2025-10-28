@@ -5,15 +5,18 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ClienteDTOPeticion {
-	
+public class ServicioDTOPeticion {
+
 	private String nombre;
-	private String apellido;
-	private String email;	
+	private String descripcion;
+	private Integer precio;
+	private byte[] imagen;
+	private Integer duracionMin;
+	private Boolean estado;
 
 	private CategoriaDTOPeticion objCategoria;
 
-	public ClienteDTOPeticion() { 
+	public ServicioDTOPeticion() {
 
 	}
 }
