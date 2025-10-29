@@ -58,7 +58,6 @@ public class ServicioService implements IServicioService {
     public ServicioDTORespuesta save(ServicioDTOPeticion cliente) {
         ServicioDTORespuesta objServicioOut = null;
         ServicioEntity objServicioIn = modelMapper.map(cliente, ServicioEntity.class);
-        objServicioIn.setEstado(true);
         Optional<ServicioEntity> servicio = servicioRepository.save(objServicioIn);
         if (servicio.isPresent()) {
             ServicioEntity servicioEntity = servicio.get();
@@ -87,6 +86,7 @@ public class ServicioService implements IServicioService {
                 newServicioEntity = servicioRepository.update(servicioEntity).get();
             } else{
                 newServicioEntity = modelMapper.map(servicio, ServicioEntity.class);
+                newServicioEntity.setId(servicioEntity.getId());
                 newServicioEntity = servicioRepository.update(newServicioEntity).get();
             }
             objServicioOut = modelMapper.map(newServicioEntity, ServicioDTORespuesta.class);

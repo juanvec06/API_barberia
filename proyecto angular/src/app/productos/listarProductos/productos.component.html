@@ -26,8 +26,8 @@
         <tr *ngFor="let producto of listaProductos" class="text-center">
           <td>{{ producto.nombre }}</td>
           <td>
-            <span *ngIf="producto.estado === 'Disponible'" class="badge bg-success">Disponible</span>
-            <span *ngIf="producto.estado === 'No Disponible'" class="badge bg-danger">No Disponible</span>
+<span *ngIf="producto.estado === true" class="badge bg-success">Disponible</span>
+            <span *ngIf="producto.estado === false" class="badge bg-danger">No Disponible</span>
           </td>
           <td>{{ producto.objCategoria?.nombre }}</td>
           <td>

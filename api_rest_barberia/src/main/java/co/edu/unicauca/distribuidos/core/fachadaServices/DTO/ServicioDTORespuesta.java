@@ -11,7 +11,7 @@ public class ServicioDTORespuesta {
     private String nombre;
     private String descripcion;
     private Integer precio;
-    private byte[] imagen;
+    private String imagen;
     private Integer duracionMin;
     private Boolean estado;
 

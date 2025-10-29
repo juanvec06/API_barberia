@@ -36,15 +36,25 @@ export class ProductoFacadeService {
    * Si tiene éxito, vuelve a cargar la lista completa para mantenerla sincronizada.
    * @param productoFormData Los datos crudos del FormGroup.
    */
-  public crearProducto(productoFormData: any): void {
-    const productoDTO: ProductoCreateUpdateDTO = {
-      ...productoFormData,
-      idCategoria: productoFormData.objCategoria.id // Transformamos el objeto Categoria a solo el ID.
-    };
+    public crearProducto(productoFormData: any): void {
+      // 1. Verificamos si la imagen existe y extraemos solo la parte Base64.
+      const imagenPuraBase64 = productoFormData.imagen
+        ? (productoFormData.imagen as string).split(',')[1] // Divide la cadena por la coma y toma la segunda parte
+        : null;
 
-    this.productoService.create(productoDTO).pipe(
-      tap(() => this.cargarProductos()) // Si la creación tiene éxito, recargamos la lista.
-    ).subscribe();
+      const productoDTO: ProductoCreateUpdateDTO = {
+        nombre: productoFormData.nombre,
+        descripcion: productoFormData.descripcion,
+        precio: productoFormData.precio,
+        imagen: imagenPuraBase64, // <-- 2. Usamos la cadena Base64 limpia.
+        duracionMin: parseInt(String(productoFormData.duracion).match(/\d+/)?.[0] || '0', 10),
+        estado: productoFormData.estado === 'Disponible',
+        objCategoria: { id: productoFormData.objCategoria.id }
+      };
+
+      this.productoService.create(productoDTO).pipe(
+        tap(() => this.cargarProductos())
+      ).subscribe();
   }
 
   /**
@@ -54,13 +64,23 @@ export class ProductoFacadeService {
    * @param productoFormData Los datos crudos del FormGroup.
    */
   public actualizarProducto(id: number, productoFormData: any): void {
+    // 1. Extraemos solo la parte Base64 de la imagen.
+    const imagenPuraBase64 = productoFormData.imagen
+      ? (productoFormData.imagen as string).split(',')[1]
+      : null;
+
     const productoDTO: ProductoCreateUpdateDTO = {
-      ...productoFormData,
-      idCategoria: productoFormData.objCategoria.id
+      nombre: productoFormData.nombre,
+      descripcion: productoFormData.descripcion,
+      precio: productoFormData.precio,
+      imagen: imagenPuraBase64, // <-- 2. Usamos la cadena limpia aquí también.
+      duracionMin: parseInt(String(productoFormData.duracion).match(/\d+/)?.[0] || '0', 10),
+      estado: productoFormData.estado === 'Disponible',
+      objCategoria: { id: productoFormData.objCategoria.id }
     };
 
     this.productoService.update(id, productoDTO).pipe(
-      tap(() => this.cargarProductos()) // Recargamos la lista tras el éxito.
+      tap(() => this.cargarProductos())
     ).subscribe();
   }
 

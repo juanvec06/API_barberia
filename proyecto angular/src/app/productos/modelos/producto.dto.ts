@@ -7,10 +7,11 @@
 export interface ProductoCreateUpdateDTO {
   nombre: string;
   descripcion: string;
-  duracion: string;
   precio: number;
-  estado: string;
-  imagen: string; 
-  
-  idCategoria: number; 
+  imagen: string | null; // Puede ser string (Base64) o null si no se cambia
+  duracionMin: number; // CAMBIO: nombre y tipo
+  estado: boolean;      // CAMBIO: tipo
+  objCategoria: {
+    id: number;
+  };
 }

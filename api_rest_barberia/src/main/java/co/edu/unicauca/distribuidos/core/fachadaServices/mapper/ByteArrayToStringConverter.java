@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 public class ByteArrayToStringConverter implements Converter<byte[], String> {
     private final String URLImages = "./uploads/images/";
+    private final String URLserver = "http://localhost:5000/images/";
     @Override
     public String convert(MappingContext<byte[], String> mappingContext) {
         byte[] imageBytes = mappingContext.getSource();
@@ -25,7 +26,7 @@ public class ByteArrayToStringConverter implements Converter<byte[], String> {
             String fileName = "image_" + System.currentTimeMillis() + ".png";
             Path path = Paths.get(URLImages, fileName);
             Files.write(path, imageBytes);
-            return URLImages + fileName;
+            return URLserver + fileName;
 
         }catch(Exception e) {
             e.printStackTrace();
