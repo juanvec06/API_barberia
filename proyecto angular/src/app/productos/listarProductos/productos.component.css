@@ -18,7 +18,6 @@
   color: var(--color-acento);
 }
 
-/* Ajustes para que la tabla y sus botones se vean bien con nuestro tema */
 .table {
   border-color: var(--color-acento);
 }

@@ -57,8 +57,15 @@
     <!-- Fila para Duración y Precio -->
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="duracion" class="form-label">Duración (ej: 45 min):</label>
-        <input type="text" class="form-control" id="duracion" formControlName="duracion">
+        <label for="duracion" class="form-label">Duración (en minutos):</label>
+        <input type="number" class="form-control" id="duracion" formControlName="duracion"
+          [ngClass]="{ 'is-invalid': f['duracion'].invalid && f['duracion'].touched }">
+
+        <!-- Mensajes de error para la duración -->
+        <div *ngIf="f['duracion'].invalid && f['duracion'].touched" class="invalid-feedback">
+          <div *ngIf="f['duracion'].errors?.['required']">La duración es obligatoria.</div>
+          <div *ngIf="f['duracion'].errors?.['pattern']">La duración debe ser un número (ej: 45).</div>
+        </div>
       </div>
       <div class="col-md-6 mb-3">
         <label for="precio" class="form-label">Precio:</label>

@@ -66,8 +66,15 @@
     <!-- Fila para Duración y Precio -->
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="duracion" class="form-label">Duración (ej: 45 min):</label>
-        <input type="text" class="form-control" id="duracion" formControlName="duracion">
+        <label for="duracion" class="form-label">Duración (en minutos):</label>
+        <input type="number" class="form-control" id="duracion" formControlName="duracion"
+          [ngClass]="{ 'is-invalid': f['duracion'].invalid && f['duracion'].touched }">
+
+        <!-- Mensajes de error para la duración -->
+        <div *ngIf="f['duracion'].invalid && f['duracion'].touched" class="invalid-feedback">
+          <div *ngIf="f['duracion'].errors?.['required']">La duración es obligatoria.</div>
+          <div *ngIf="f['duracion'].errors?.['pattern']">La duración debe ser un número (ej: 45).</div>
+        </div>
       </div>
       <div class="col-md-6 mb-3">
         <label for="precio" class="form-label">Precio:</label>
@@ -81,7 +88,7 @@
       </div>
     </div>
 
-    <!-- Campo Imagen (ahora funcional) -->
+    <!-- Campo Imagen  -->
     <div class="mb-4">
       <label for="imagen" class="form-label">Imagen:</label>
       <!-- 
@@ -92,10 +99,6 @@
     </div>
 
     <!-- Vista previa de la imagen seleccionada -->
-    <!-- 
-  - *ngIf se asegura de que este bloque solo se muestre si hay una imagen cargada en el formulario.
-  - [src] se enlaza al valor del control 'imagen' (que contiene la cadena Base64).
--->
     <div *ngIf="f['imagen'].value" class="mb-4 text-center">
       <label class="form-label d-block">Vista Previa:</label>
       <img [src]="f['imagen'].value" alt="Vista previa de la imagen" class="img-fluid rounded"

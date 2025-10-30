@@ -16,7 +16,7 @@
 
 /* Estilos para que los inputs y selects tengan un look dark mode */
 .form-control, .form-select {
-  background-color: #343a40; /* Un gris oscuro, similar al de la tabla */
+  background-color: #343a40; 
   color: var(--color-texto);
   border: 1px solid #555;
 }

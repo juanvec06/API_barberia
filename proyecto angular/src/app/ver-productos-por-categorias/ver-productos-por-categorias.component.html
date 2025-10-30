@@ -1,33 +1,44 @@
-<!-- Ruta: src/app/ver-productos-por-categorias/ver-productos-por-categorias.component.html -->
+<!--
+  Descripción: Plantilla para la vista principal del cliente. Define un layout de dos
+  columnas adaptable (responsive) que muestra una barra lateral de categorías y una
+  cuadrícula de productos.
+-->
 <div class="container-fluid mt-4 py-5">
-    <!-- Fila principal que contendrá nuestras dos columnas -->
+    <!-- Fila principal que estructura el layout de la página. -->
     <div class="row">
 
-        <!-- Columna 1: Barra Lateral de Categorías -->
         <!--
-      Clases de Bootstrap explicadas:
-      - col-12: En el tamaño más pequeño (xs), ocupa todo el ancho (12 columnas).
-      - col-sm-2: A partir del tamaño pequeño (sm), ocupa 2 de 12 columnas.
-      - col-md-4: A partir del tamaño mediano (md), ocupa 4 de 12 columnas.
-      Bootstrap aplica la clase más grande que corresponda al tamaño de la pantalla.
-    -->
+          =======================================================
+          === Columna 1: Barra Lateral de Filtro de Categorías ===
+          =======================================================
+          Utiliza el sistema de rejilla de Bootstrap para su comportamiento responsive:
+          - col-12: Ocupa el ancho completo en pantallas muy pequeñas (<576px), apilándose.
+          - col-sm-2: Ocupa 2 de 12 columnas en pantallas pequeñas (>=576px).
+          - col-md-4: Ocupa 4 de 12 columnas en pantallas medianas (>=768px).
+        -->
         <aside class="col-12 col-sm-2 col-md-4">
             <h2 class="sidebar-title mb-3">Categorías</h2>
 
-            <!--  list-group de Bootstrap para la lista -->
+            <!-- Componente `list-group` de Bootstrap para presentar la lista de categorías. -->
             <div class="list-group">
                 <!--
-      - *ngFor recorre el array de categorías.
-      - [class.active] añade la clase 'active' SÓLO si el id de la categoría actual
-        coincide con el 'selectedCategoryId' de nuestro componente.
-      - (click) llama al método 'selectCategory' pasándole el id de la categoría
-        en la que se hizo clic.
-
-    -->
+                  Opción estática para mostrar todos los productos.
+                  - [class.active]: Enlace de clase que aplica el estilo 'active' si
+                    `selectedCategoryId` en el componente es `null`.
+                  - (click): Llama al método `selectCategory` con `null` para desactivar el filtro.
+                -->
                 <a class="list-group-item list-group-item-action" [class.active]="selectedCategoryId === null"
                     (click)="selectCategory(null)">
                     Todas las categorías
                 </a>
+                <!--
+                  Iteración sobre la lista de categorías obtenida desde el componente.
+                  - *ngFor: Directiva estructural de Angular que crea un elemento `<a>` por cada
+                    categoría en el arreglo `categorias`.
+                  - [class.active]: Aplica el estilo 'active' si el `id` de la categoría actual
+                    coincide con `selectedCategoryId`.
+                  - (click): Llama a `selectCategory` con el `id` de la categoría clicada.
+                -->
                 <a *ngFor="let cat of categorias" class="list-group-item list-group-item-action"
                     [class.active]="cat.id === selectedCategoryId" (click)="selectCategory(cat.id)">
                     {{ cat.nombre }}
@@ -35,60 +46,85 @@
             </div>
         </aside>
 
-        <!-- Columna 2: Sección de Productos -->
         <!--
-      Clases de Bootstrap explicadas:
-      - col-12: En el tamaño más pequeño (xs), ocupa todo el ancho.
-      - col-sm-10: A partir del tamaño pequeño (sm), ocupa las 10 columnas restantes.
-      - col-md-8: A partir del tamaño mediano (md), ocupa las 8 columnas restantes.
-    -->
+          ===================================================
+          === Columna 2: Cuadrícula de Productos/Servicios ===
+          ===================================================
+          Comportamiento responsive complementario a la barra lateral:
+          - col-12: Ancho completo en pantallas muy pequeñas.
+          - col-sm-10: Ocupa las 10 columnas restantes en pantallas pequeñas.
+          - col-md-8: Ocupa las 8 columnas restantes en pantallas medianas.
+        -->
         <main class="col-12 col-sm-10 col-md-8">
             <h2 class="products-title mb-4">Nuestros Servicios</h2>
 
-            <!-- Fila que contendrá todas las tarjetas de productos -->
             <!--
-    Clases de Bootstrap explicadas:
-    - row-cols-sm-3: A partir de 576px, muestra 3 columnas (tarjetas) por fila.
-    - row-cols-md-4: A partir de 768px, muestra 4 columnas por fila.
-    - row-cols-lg-6: A partir de 992px, muestra 6 columnas por fila.
-    - g-4: Añade un espaciado (gutter) entre las columnas y filas.
-  -->
+              Contenedor de la cuadrícula de productos.
+              - `row-cols-*`: Clases de Bootstrap que controlan cuántas tarjetas se muestran por fila
+                en diferentes tamaños de pantalla (breakpoints), creando un grid responsive.
+                - 1 columna en pantallas muy pequeñas.
+                - 3 columnas en pantallas 'sm'.
+                - 4 columnas en pantallas 'md'.
+                - 6 columnas en pantallas 'lg'.
+              - g-4: Añade un espaciado (gutter) entre las tarjetas.
+            -->
             <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-4">
-                <!-- Iteramos sobre la lista de productos FILTRADOS -->
+                <!--
+                  Itera sobre la lista `filteredProducts` del componente. Esta lista
+                  contiene solo los productos que deben mostrarse según el filtro actual.
+                -->
                 <div *ngFor="let producto of filteredProducts" class="col product-card-container">
+                    <!--
+                      Tarjeta de producto individual.
+                      - h-100: Asegura que todas las tarjetas en una misma fila tengan la misma altura.
+                      - product-card: Clase personalizada para el efecto de volteo 3D.
+                    -->
                     <div class="card h-100 product-card">
-                        <!-- CARA FRONTAL DE LA TARJETA -->
+                        <!-- === CARA FRONTAL DE LA TARJETA === -->
                         <div class="card-front">
+                            <!-- Etiqueta de categoría posicionada sobre la imagen. -->
+                            <span *ngIf="producto.objCategoria" class="category-badge">
+                                {{ producto.objCategoria.nombre }}
+                            </span>
+
+                            <!-- Imagen del producto. `[src]` hace un enlace de propiedad a la URL de la imagen. -->
                             <img [src]="producto.imagen" class="card-img-top" [alt]="producto.nombre">
 
+                            <!-- Cuerpo de la tarjeta con nombre y precio. -->
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ producto.nombre }}</h5>
-                                <p class="card-text price mt-auto">{{ producto.precio | currency:'COP':'symbol':'1.0-0'
-                                    }}</p>
+                                <!--
+                                  `mt-auto` empuja el precio al fondo del `card-body`.
+                                  El pipe `currency` formatea el valor numérico como moneda local (COP).
+                                -->
+                                <p class="card-text price mt-auto">{{ producto.precio | currency:'COP':'symbol':'1.0-0' }}</p>
                             </div>
 
-                            <!-- Badge para el estado  -->
+                            <!-- Etiqueta de estado (Disponible/No Disponible) con color condicional. -->
                             <span *ngIf="producto.estado === true" class="badge bg-success">Disponible</span>
                             <span *ngIf="producto.estado === false" class="badge bg-danger">No Disponible</span>
                         </div>
 
-                        <!-- CARA TRASERA DE LA TARJETA -->
+                        <!-- === CARA TRASERA DE LA TARJETA === -->
                         <div class="card-back d-flex flex-column p-3">
                             <h5 class="card-title-back">{{ producto.nombre }}</h5>
                             <p class="card-text-back">{{ producto.descripcion }}</p>
-                            <div class="mt-auto text-end">
+                            <!-- `mt-auto` empuja la duración a la parte inferior de la tarjeta. -->
+                            <div class="mt-auto text-center">
                                 <span class="duration-badge">
-                                    <i class="bi bi-clock-fill me-1"></i>
+                                    <i class="bi bi-clock-fill me-1"></i> <!-- Icono de Bootstrap Icons -->
                                     {{ producto.duracionMin }} min
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Mensaje por si no hay productos en la categoría seleccionada -->
+            <!--
+              Mensaje que se muestra condicionalmente con `*ngIf` solo si la lista
+              de productos filtrados está vacía.
+            -->
             <div *ngIf="filteredProducts.length === 0" class="text-center mt-5 no-products-message">
                 <p>No hay servicios disponibles en esta categoría.</p>
             </div>
